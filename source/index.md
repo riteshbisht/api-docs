@@ -12,7 +12,11 @@ toc_footers:
 
 includes:
   - errors
-
+  - user
+  - report
+  - client
+  - org
+  
 search: true
 ---
 
