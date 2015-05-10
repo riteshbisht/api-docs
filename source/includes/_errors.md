@@ -1,20 +1,51 @@
 # Errors
 
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files...just save them to the `includes` folder and add them to the top of your `index.md`'s frontmatter. Files are included in the order listed.</aside>
+> Example Response
 
-The Kittn API uses the following error codes:
+> Error Message returned when attempting to create an Office without passing any parameters
 
+```shell
+{
+"developerMessage": "The request was invalid. This typically will happen due to validation errors which are provided.",
+"developerDocLink": "https://github.com/openMF/mifosx/wiki/HTTP-API-Error-codes",
+"httpStatusCode": "400",
+"defaultUserMessage": "Validation errors exist.",
+"userMessageGlobalisationCode": "validation.msg.validation.errors.exist",
+"errors": [
+	{
+	"developerMessage": "The parameter name cannot be blank.",
+	"defaultUserMessage": "The parameter name cannot be blank.",
+	"userMessageGlobalisationCode": "validation.msg.office.name.cannot.be.blank",
+	"parameterName": "name",
+	"value": null,
+	"args": []
+	},
+	{
+	"developerMessage": "The parameter openingDate cannot be blank.",
+	"defaultUserMessage": "The parameter openingDate cannot be blank.",
+	"userMessageGlobalisationCode": "validation.msg.office.openingDate.cannot.be.blank",
+	"parameterName": "openingDate", "value": null, "args": []
+	},
+	{
+	"developerMessage": "The parameter parentId cannot be blank.",
+	"defaultUserMessage": "The parameter parentId cannot be blank.",
+	"userMessageGlobalisationCode":
+	"validation.msg.office.parentId.cannot.be.blank", "parameterName":
+	"parentId", "value": null, "args": []
+	}
+]
+}
+```
+
+All errors are returned in JSON.
 
 Error Code | Meaning
 ---------- | -------
-400 | Bad Request -- Your request sucks
-401 | Unauthorized -- Your API key is wrong
-403 | Forbidden -- The kitten requested is hidden for administrators only
-404 | Not Found -- The specified kitten could not be found
+200 | OK -- Everything Worked.
+400 | Bad Request -- Invalid Parameter or Data Integrity Issue.
+401 | Unauthorized -- Your Authorization Token is invalid
+403 | Forbidden -- You don't have access to this resource
+404 | Not Found -- The specified resource could not be found
 405 | Method Not Allowed -- You tried to access a kitten with an invalid method
-406 | Not Acceptable -- You requested a format that isn't json
-410 | Gone -- The kitten requested has been removed from our servers
-418 | I'm a teapot
-429 | Too Many Requests -- You're requesting too many kittens! Slown down!
 500 | Internal Server Error -- We had a problem with our server. Try again later.
-503 | Service Unavailable -- We're temporarially offline for maintanance. Please try again later.
+503 | Service Unavailable -- We're temporarily offline for maintenance. Please try again later.
