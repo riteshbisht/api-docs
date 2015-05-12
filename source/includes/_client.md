@@ -162,7 +162,7 @@ If the client happens to be already active this API will result in an error.
 
 
 ```shell
-curl "https://Domain Name/api/v1/clients/{clientId}?command=close"
+curl "https://DomainName/api/v1/clients/{clientId}?command=close"
   -X POST
   -H "Authorization: Basic meowmeowmeow"
   -H "Content-Type: application/json"
@@ -196,7 +196,7 @@ If the client have any active loans/savingsAccount this API will result in an er
 
 
 ```shell
-curl "https://Domain Name/api/v1/clients/{clientId}?command=reject"
+curl "https://DomainName/api/v1/clients/{clientId}?command=reject"
   -X POST
   -H "Authorization: Basic meowmeowmeow"
   -H "Content-Type: application/json"
@@ -229,13 +229,13 @@ If the client is any other status, this API throws an error.
 
 ### HTTP Request
 
-`POST https://Domain Name/api/v1/clients/{clientId}?command=reject`
+`POST https://DomainName/api/v1/clients/{clientId}?command=reject`
 
 ##Withdraw a Client
 
 
 ```shell
-curl "https://Domain Name/api/v1/clients/{clientId}?command=withdraw"
+curl "https://DomainName/api/v1/clients/{clientId}?command=withdraw"
   -X POST
   -H "Authorization: Basic meowmeowmeow"
   -H "Content-Type: application/json"
@@ -269,4 +269,112 @@ If the client is any other status, this API throws an error.
 
 ### HTTP Request
 
-`POST https://Domain Name/api/v1/clients/{clientId}?command=withdraw`
+`POST https://DomainName/api/v1/clients/{clientId}?command=withdraw`
+
+
+##Reactivate a Client
+
+
+```shell
+curl "https://DomainName/api/v1/clients/{clientId}?command=reactivate"
+  -X POST
+  -H "Authorization: Basic meowmeowmeow"
+  -H "Content-Type: application/json"
+  -H "Accept: application/json"
+  -d "Request Body:
+	{
+"reactivationDate":"28 November 2014",
+"locale":"en",
+"dateFormat":"dd MMMM yyyy"
+}"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+
+  "clientId":15,
+  "resourceId":15
+}
+```
+Clients can be reactivated after they have been closed.
+
+Trying to reactivate a client in any other state throws an error.
+
+|Mandatory Fields|
+|-----------------|
+|reactivationDate|
+
+### HTTP Request
+
+`POST https://DomainName/api/v1/clients/{clientId}?command=reactivate`
+
+
+##assign a Staff
+
+
+```shell
+curl "https://DomainName/api/v1/clients/{clientId}?command=assignStaff"
+  -X POST
+  -H "Authorization: Basic meowmeowmeow"
+  -H "Content-Type: application/json"
+  -H "Accept: application/json"
+  -d "Request Body:
+	{
+  "staffId": "1"
+}"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "officeId": 1,
+  "clientId": 1,
+  "resourceId": 1,
+  "changes": {"staffId":1}
+}
+
+```
+Allows you to assign a Staff for existed Client.
+
+The selected Staff should belong to the same office (or an officer higher up in the hierarchy) as the Client he manages.
+
+### HTTP Request
+
+`POST https://DomainName/api/v1/clients/{clientId}?command=assignStaff`
+
+
+
+##Unassign a Staff
+
+
+```shell
+curl "https://Domain Name/api/v1/clients/{clientId}?command=unassignStaff"
+  -X POST
+  -H "Authorization: Basic meowmeowmeow"
+  -H "Content-Type: application/json"
+  -H "Accept: application/json"
+  -d "Request Body:
+	{
+  "staffId": "1"
+}"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "officeId": 1,
+  "clientId": 1,
+  "resourceId": 1,
+  "changes": {"staffId":1}
+}
+
+```
+Allows you to unassign the Staff assigned to a Client.
+
+### HTTP Request
+
+`POST https://DomainName/api/v1/clients/{clientId}?command=unassignStaff`
