@@ -154,4 +154,119 @@ If the client happens to be already active this API will result in an error.
 
 ### HTTP Request
 
-`POST https://Domain Name/api/v1/clients/{clientId}?command=activate`
+`POST https://DomainName/api/v1/clients/{clientId}?command=activate`
+
+
+
+##Close a Client
+
+
+```shell
+curl "https://Domain Name/api/v1/clients/{clientId}?command=close"
+  -X POST
+  -H "Authorization: Basic meowmeowmeow"
+  -H "Content-Type: application/json"
+  -H "Accept: application/json"
+  -d "Request Body:
+	{
+	  "dateFormat":"dd MMMM yyyy",
+	  "locale":"en",
+	  "closureDate":"25 June 2013",
+	  "closureReasonId":"11"
+	}"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "clientId":15,
+  "resourceId":15
+}
+```
+Clients can be closed if they do not have any non-closed loans/savingsAccount. This API exists to close a client .
+
+If the client have any active loans/savingsAccount this API will result in an error.
+
+### HTTP Request
+
+`POST https://DomainName/api/v1/clients/{clientId}?command=close`
+
+##Reject a Client
+
+
+```shell
+curl "https://Domain Name/api/v1/clients/{clientId}?command=reject"
+  -X POST
+  -H "Authorization: Basic meowmeowmeow"
+  -H "Content-Type: application/json"
+  -H "Accept: application/json"
+  -d "Request Body:
+	{
+"rejectionDate":"28 November 2014",
+"rejectionReasonId":16,
+"locale":"en",
+"dateFormat":"dd MMMM yyyy"
+}"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "clientId":15,
+  "resourceId":15
+}
+```
+Clients can be rejected when client is in pending for activation status.
+
+If the client is any other status, this API throws an error.
+
+|Mandatory Fields|
+|-----------------|
+|rejectionDate|
+|rejectionReasonId|
+
+### HTTP Request
+
+`POST https://Domain Name/api/v1/clients/{clientId}?command=reject`
+
+##Withdraw a Client
+
+
+```shell
+curl "https://Domain Name/api/v1/clients/{clientId}?command=withdraw"
+  -X POST
+  -H "Authorization: Basic meowmeowmeow"
+  -H "Content-Type: application/json"
+  -H "Accept: application/json"
+  -d "Request Body:
+	{
+"withdrawalDate":"28 November 2014",
+"withdrawalReasonId":17,
+"locale":"en",
+"dateFormat":"dd MMMM yyyy"
+}"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "officeId":1,
+  "clientId":15,
+  "resourceId":15
+}
+```
+Client applications can be withdrawn when client is in a pending for activation status.
+
+If the client is any other status, this API throws an error.
+
+|Mandatory Fields|
+|-----------------|
+|withdrawalDate|
+|withdrawalReasonId|
+
+### HTTP Request
+
+`POST https://Domain Name/api/v1/clients/{clientId}?command=withdraw`
